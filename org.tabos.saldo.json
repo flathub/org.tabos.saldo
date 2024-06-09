@@ -41,6 +41,10 @@
                     "url" : "https://gitlab.com/tabos/saldo.git",
                     "tag" : "0.7.0",
                     "commit" : "6856a52d33c8720ae06e0d939be06945aba0228c"
+                },
+                {
+                    "type" : "patch",
+                    "path" : "fix_appdata.patch"
                 }
             ]
         }
