@@ -15,8 +15,8 @@
     "sources": [
         {
             "type": "file",
-            "url": "https://files.pythonhosted.org/packages/15/d9/c679e9eda76bfc0d60c9d7a4084ca52d0631d9f24ef04f818012f6d1282e/cryptography-40.0.1.tar.gz",
-            "sha256": "2803f2f8b1e95f614419926c7e6f55d828afc614ca5ed61543877ae668cc3472",
+            "url": "https://files.pythonhosted.org/packages/69/ec/9fb9dcf4f91f0e5e76de597256c43eedefd8423aa59be95c70c4c3db426a/cryptography-43.0.0.tar.gz",
+            "sha256": "b88075ada2d51aa9f18283532c9f60e72170041bba88d7f37e49cbb10275299e",
             "x-checker-data": {
                 "type": "pypi",
                 "name": "cryptography"
