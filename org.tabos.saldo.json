@@ -32,6 +32,17 @@
         "cryptography.json",
         "python3-requirements.json",
         {
+            "name": "blueprint-compiler",
+            "buildsystem": "meson",
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "https://gitlab.gnome.org/jwestman/blueprint-compiler",
+                    "tag": "v0.14.0"
+                }
+            ]
+        },
+        {
             "name" : "saldo",
             "builddir" : true,
             "buildsystem" : "meson",
@@ -39,12 +50,8 @@
                 {
                     "type" : "git",
                     "url" : "https://gitlab.com/tabos/saldo.git",
-                    "tag" : "0.7.0",
-                    "commit" : "6856a52d33c8720ae06e0d939be06945aba0228c"
-                },
-                {
-                    "type" : "patch",
-                    "path" : "fix_appdata.patch"
+                    "tag" : "0.8.0",
+                    "commit" : "c30d57bab6fa4c1bb58c745c0f096f2238ba0f3c"
                 }
             ]
         }
