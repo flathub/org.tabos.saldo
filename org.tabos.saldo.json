@@ -1,7 +1,7 @@
 {
     "app-id" : "org.tabos.saldo",
     "runtime" : "org.gnome.Platform",
-    "runtime-version" : "47",
+    "runtime-version" : "49",
     "sdk" : "org.gnome.Sdk",
     "sdk-extensions": [
         "org.freedesktop.Sdk.Extension.rust-stable"
@@ -33,17 +33,6 @@
         "cryptography.json",
         "python3-requirements.json",
         {
-            "name": "blueprint-compiler",
-            "buildsystem": "meson",
-            "sources": [
-                {
-                    "type": "git",
-                    "url": "https://gitlab.gnome.org/jwestman/blueprint-compiler",
-                    "tag": "v0.14.0"
-                }
-            ]
-        },
-        {
             "name" : "saldo",
             "builddir" : true,
             "buildsystem" : "meson",
@@ -51,8 +40,8 @@
                 {
                     "type" : "git",
                     "url" : "https://gitlab.com/tabos/saldo.git",
-                    "tag" : "0.8.0",
-                    "commit" : "c30d57bab6fa4c1bb58c745c0f096f2238ba0f3c"
+                    "tag" : "0.8.1",
+                    "commit" : "f35f789d7409ebc07e861a9e110e6b570a8c6c89"
                 }
             ]
         }
