@@ -40,8 +40,8 @@
                 {
                     "type" : "git",
                     "url" : "https://gitlab.com/tabos/saldo.git",
-                    "tag" : "0.8.3",
-                    "commit" : "3267aa0ed78184525d551bd5238c00a575dc8e79"
+                    "tag" : "0.8.4",
+                    "commit" : "7775aa22a0be73c45b9ad0eacf339c97fd2d2a46"
                 }
             ]
         }
