@@ -16,17 +16,6 @@
         "--talk-name=org.gnome.ScreenSaver",
         "--system-talk-name=net.reactivated.Fprint"
     ],
-    "cleanup" : [
-        "/include",
-        "/lib/pkgconfig",
-        "/man",
-        "/share/doc",
-        "/share/gtk-doc",
-        "/share/man",
-        "/share/pkgconfig",
-        "*.la",
-        "*.a"
-    ],
     "modules" : [
         "python-setuptools-rust.json",
         "cryptography-python-deps.json",
