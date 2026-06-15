@@ -1,13 +1,10 @@
 {
-    "app-id" : "org.tabos.saldo",
-    "runtime" : "org.gnome.Platform",
-    "runtime-version" : "49",
-    "sdk" : "org.gnome.Sdk",
-    "sdk-extensions": [
-        "org.freedesktop.Sdk.Extension.rust-stable"
-    ],
-    "command" : "org.tabos.saldo",
-    "finish-args" : [
+    "app-id": "org.tabos.saldo",
+    "runtime": "org.gnome.Platform",
+    "runtime-version": "50",
+    "sdk": "org.gnome.Sdk",
+    "command": "org.tabos.saldo",
+    "finish-args": [
         "--device=dri",
         "--share=network",
         "--share=ipc",
@@ -16,32 +13,17 @@
         "--talk-name=org.gnome.ScreenSaver",
         "--system-talk-name=net.reactivated.Fprint"
     ],
-    "cleanup" : [
-        "/include",
-        "/lib/pkgconfig",
-        "/man",
-        "/share/doc",
-        "/share/gtk-doc",
-        "/share/man",
-        "/share/pkgconfig",
-        "*.la",
-        "*.a"
-    ],
-    "modules" : [
-        "python-setuptools-rust.json",
-        "cryptography-python-deps.json",
-        "cryptography.json",
+    "modules": [
         "python3-requirements.json",
         {
-            "name" : "saldo",
-            "builddir" : true,
-            "buildsystem" : "meson",
-            "sources" : [
+            "name": "saldo",
+            "buildsystem": "meson",
+            "sources": [
                 {
-                    "type" : "git",
-                    "url" : "https://gitlab.com/tabos/saldo.git",
-                    "tag" : "0.8.4",
-                    "commit" : "7775aa22a0be73c45b9ad0eacf339c97fd2d2a46"
+                    "type": "git",
+                    "url": "https://gitlab.com/tabos/saldo.git",
+                    "tag": "0.8.4",
+                    "commit": "7775aa22a0be73c45b9ad0eacf339c97fd2d2a46"
                 }
             ]
         }
