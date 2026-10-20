@@ -1,26 +1,34 @@
-## Updateing Dependencies
+## Updating Dependencies
 
-First make sure to clone and checkout the appropirate version of
-[python-crypthography](https://github.com/pyca/cryptography).
+All modules live in the single manifest `org.tabos.saldo.json`.
 
-The [flatpak-cargo-generator](https://github.com/flatpak/flatpak-builder-tools/tree/master/cargo) and
-[flatpak-pip-generator](https://github.com/flatpak/flatpak-builder-tools/tree/master/pip) are used
-in order to generate the `pypi-dependencies.json` and `cargo-sources.json`.
+The Python packages are pinned as PyPI artifacts (wheels where available) and
+were originally generated with
+[flatpak-pip-generator](https://github.com/flatpak/flatpak-builder-tools/tree/master/pip).
+
+### Regular Python dependencies
 
 ```sh
-flatpak-cargo-generator ../cryptography/src/rust/Cargo.lock -o cargo-sources.json
-flatpak-pip-generator --requirements requirements.txt --output pypi-dependencies
+flatpak-pip-generator --runtime org.gnome.Sdk//51 \
+    --requirements-file requirements.txt --output pypi-dependencies
 ```
 
-where  `../cryptography/src/rust/Cargo.lock` is from the previusly checked out
-crypthography repo and version. Make sure that the checked out version is in sync with
-the one in `pypi-dependencies.json`.
+Copy the resulting modules into the `modules` array of `org.tabos.saldo.json`.
 
-Then copy the sources for `cryptography`, `cffi` and `pycparser` from `pypi-dependencies.json`
-into `cryptography.json`.
+### cryptography
 
-Sometimes the build tools (such as `setuptools_rust`) may have to be updated in
-`python-setuptools-rust.json`.
+`cryptography` is installed from its official manylinux wheels (x86_64 and
+aarch64) instead of being compiled from source, so no Rust toolchain or SDK
+extension is needed:
+
+```sh
+flatpak-pip-generator --runtime org.gnome.Sdk//51 \
+    --prefer-wheels=cryptography --wheel-arches x86_64,aarch64 cryptography
+```
+
+Replace the `python3-cryptography` module with the generated one (both wheel
+sources, including their `sha256`). Its runtime dependencies `cffi` and
+`pycparser` are installed by the `cryptography-deps` module.
 
 ## Building Locally
 
@@ -29,3 +37,4 @@ To build the flatpak the same way it is built on the Flathub build servers run:
 ```sh
 flatpak run org.flatpak.Builder -v --bundle-sources --install-deps-from=flathub --user \
     --force-clean build-dir org.tabos.saldo.json
+```

@@ -1,13 +1,10 @@
 {
-    "app-id" : "org.tabos.saldo",
-    "runtime" : "org.gnome.Platform",
-    "runtime-version" : "49",
-    "sdk" : "org.gnome.Sdk",
-    "sdk-extensions": [
-        "org.freedesktop.Sdk.Extension.rust-stable"
-    ],
-    "command" : "org.tabos.saldo",
-    "finish-args" : [
+    "app-id": "org.tabos.saldo",
+    "runtime": "org.gnome.Platform",
+    "runtime-version": "51",
+    "sdk": "org.gnome.Sdk",
+    "command": "org.tabos.saldo",
+    "finish-args": [
         "--device=dri",
         "--share=network",
         "--share=ipc",
@@ -16,21 +13,182 @@
         "--talk-name=org.gnome.ScreenSaver",
         "--system-talk-name=net.reactivated.Fprint"
     ],
-    "modules" : [
-        "python-setuptools-rust.json",
-        "cryptography-python-deps.json",
-        "cryptography.json",
-        "python3-requirements.json",
+    "modules": [
         {
-            "name" : "saldo",
-            "builddir" : true,
-            "buildsystem" : "meson",
-            "sources" : [
+            "name": "cryptography-deps",
+            "buildsystem": "simple",
+            "build-commands": [
+                "pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} \"pycparser\" --no-build-isolation",
+                "pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} \"cffi\" --no-build-isolation"
+            ],
+            "sources": [
                 {
-                    "type" : "git",
-                    "url" : "https://gitlab.com/tabos/saldo.git",
-                    "tag" : "0.8.4",
-                    "commit" : "7775aa22a0be73c45b9ad0eacf339c97fd2d2a46"
+                    "type": "file",
+                    "url": "https://files.pythonhosted.org/packages/90/11/0e6f11117525ff0eec40ebac3d313376f102df93ca44ad9e893ee85e4f89/pycparser-3.11-py3-none-any.whl",
+                    "sha256": "51d5a8ba2be0bbe440b99d2112604c95bbbc3c2748a64260186c541e1729cd80",
+                    "x-checker-data": {
+                        "type": "pypi",
+                        "name": "pycparser"
+                    }
+                },
+                {
+                    "type": "file",
+                    "url": "https://files.pythonhosted.org/packages/9e/ef/008a1939e372c06329a3fce4279c02f328488f3526744906eeec3da7ad5f/cffi-2.1.1.tar.gz",
+                    "sha256": "dd31f52ea1086513bb9df30f8fcee9b8918323ae067a3d5b78bc826a000712be",
+                    "x-checker-data": {
+                        "type": "pypi",
+                        "name": "cffi"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "python3-cryptography",
+            "buildsystem": "simple",
+            "build-commands": [
+                "pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} cryptography --no-build-isolation"
+            ],
+            "sources": [
+                {
+                    "type": "file",
+                    "url": "https://files.pythonhosted.org/packages/4f/87/ef344a9e616871f2519c22d6afcda79ddd5d35e9592d95eb6e677608d055/cryptography-50.0.2-cp39-abi3-manylinux_2_28_x86_64.whl",
+                    "sha256": "f21e8a22c8605750c7af886bab299a363721264061b4ac0a30efb73cfd58efc5"
+                },
+                {
+                    "type": "file",
+                    "url": "https://files.pythonhosted.org/packages/c1/63/61b15dc1a8de03fe0adbe3fd7608b3ad5c73bf50993bbcb1faaa930afe33/cryptography-50.0.2-cp39-abi3-manylinux_2_28_aarch64.whl",
+                    "sha256": "dfe9763530994147d9af1def057a5b9658b00e8f8fe8743d144d1e0911c2e454"
+                }
+            ]
+        },
+        {
+            "name": "python3-fints",
+            "buildsystem": "simple",
+            "build-commands": [
+                "pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} \"fints\" --no-build-isolation --ignore-installed"
+            ],
+            "sources": [
+                {
+                    "type": "file",
+                    "url": "https://files.pythonhosted.org/packages/58/9d/40b6267367182187139a4000b82a3b287d84d745bccd808e75d916920e9d/bleach-6.4.0-py3-none-any.whl",
+                    "sha256": "4b6b6a54fff2e69a3dde9d21cc6301220bee3c3cb792187d11403fd795031081"
+                },
+                {
+                    "type": "file",
+                    "url": "https://files.pythonhosted.org/packages/c4/51/29046e48f693c54e5b7412216d447a1d8362c9653148d98c02cdf65fa733/certifi-2026.10.19-py3-none-any.whl",
+                    "sha256": "42d35340cc5b9ba78e818ddbff0c5b1c2b779de448a340fd1b989f5fa8670e1b"
+                },
+                {
+                    "type": "file",
+                    "url": "https://files.pythonhosted.org/packages/33/1c/f41d4e74c28ab327ff3acd36053f7ea506c55872d7a90b0fa71aa3ab0c89/charset_normalizer-3.5.2.tar.gz",
+                    "sha256": "39de2a259fc954455c57274dc94c79d5842774e1247a016aff30bc0efed0f4ef"
+                },
+                {
+                    "type": "file",
+                    "url": "https://files.pythonhosted.org/packages/42/b0/b709cc33ccb0288f41f2d92dfd754d2ccf925cb9277a66effbc132cd004c/elementpath-5.1.4-py3-none-any.whl",
+                    "sha256": "5ec8d7bb44b16c98414a6a95e20cb150f3cbfc3cac65edc14773288c7a937376"
+                },
+                {
+                    "type": "file",
+                    "url": "https://files.pythonhosted.org/packages/75/fc/cc600677fe58519352ae5fe9367d05d0054faa47e8c57ef50a1bb9c77b0e/enum_tools-0.12.0-py3-none-any.whl",
+                    "sha256": "d69b019f193c7b850b17d9ce18440db7ed62381571409af80ccc08c5218b340a"
+                },
+                {
+                    "type": "file",
+                    "url": "https://files.pythonhosted.org/packages/aa/d5/4ca6bbf0f7faa2cfead2008db3b95e1b5ac0459b22c519a20c1d623dda1d/fints-5.0.1-py3-none-any.whl",
+                    "sha256": "e48921b56c8fd674d51011e8859c756a030d4a636d6bc05f95e8a97d07188bd6"
+                },
+                {
+                    "type": "file",
+                    "url": "https://files.pythonhosted.org/packages/58/a2/bb081bab032533a855d44de1d56f8e8426114ff1ba5d1f07a438a0a654f8/idna-3.20-py3-none-any.whl",
+                    "sha256": "ab7ae7122974553370f0bdb919e1a960b2cd1bc1ef0276416d896db81c14582c"
+                },
+                {
+                    "type": "file",
+                    "url": "https://files.pythonhosted.org/packages/23/ad/28ecd7cb894d172f3c9c80a075eeeb2017ac62e3632cee05a5f9493547eb/lxml-6.1.3.tar.gz",
+                    "sha256": "45222d94ddd511536f3b2f7d9deae3b2339b4ce0f075f1ca25703b07cad9dd21"
+                },
+                {
+                    "type": "file",
+                    "url": "https://files.pythonhosted.org/packages/c9/82/f143a9160b65d7dc35b91284c6c11e28a09b8565866e02efd67a96bf2df5/mt_940-5.1.1-py3-none-any.whl",
+                    "sha256": "fa33e23e0dacd949500b485a9b3857f414ee2f76cb5478ca0724d9fcf485cbde"
+                },
+                {
+                    "type": "file",
+                    "url": "https://files.pythonhosted.org/packages/71/46/17f022dd3e953bf20a04a028a21ec746d942f8d2af30fa0f124fa0e6a684/pygments-2.21.0-py3-none-any.whl",
+                    "sha256": "2363c69b61c4a97c838da3b130dcd6468f4848992b21a82f2a63ec34377137d9"
+                },
+                {
+                    "type": "file",
+                    "url": "https://files.pythonhosted.org/packages/a0/f4/c67b0b3f1b9245e8d266f0f112c500d50e5b4e83cb6f3b71b6528104182a/requests-2.34.2-py3-none-any.whl",
+                    "sha256": "2a0d60c172f83ac6ab31e4554906c0f3b3588d37b5cb939b1c061f4907e278e0"
+                },
+                {
+                    "type": "file",
+                    "url": "https://files.pythonhosted.org/packages/1d/06/7128b1dee5d616587b5e83597d1e6a651c56668820c3b8f2d7e870c1ae76/sepaxml-2.7.0-py3-none-any.whl",
+                    "sha256": "6644f695c66c2bf8f49065d4d7b0814da42140d03292131ec08e09798ad07b5d"
+                },
+                {
+                    "type": "file",
+                    "url": "https://files.pythonhosted.org/packages/a6/a5/c0b6468d3824fe3fde30dbb5e1f687b291608f9473681bbf7dabbf5a87d7/text_unidecode-1.3-py2.py3-none-any.whl",
+                    "sha256": "1311f10e8b895935241623731c2ba64f4c455287888b18189350b67134a822e8"
+                },
+                {
+                    "type": "file",
+                    "url": "https://files.pythonhosted.org/packages/49/d3/b8441a820a491ddfc024b0b0cf0393375b75ea13866d9c66727e54c2fc80/typing_extensions-4.16.0-py3-none-any.whl",
+                    "sha256": "481caa481374e813c1b176ada14e97f1f67a4539ce9cfeb3f350d78d6370c2e8"
+                },
+                {
+                    "type": "file",
+                    "url": "https://files.pythonhosted.org/packages/92/9d/c4e665119135114480843e7ab388fa94d8480650450e6f8e26b70d323a4c/urllib3-2.8.0-py3-none-any.whl",
+                    "sha256": "0cf3cae568d36aa9576b28dfb35f11328f1cb974ca7647d9475ebb86c75ac6e3"
+                },
+                {
+                    "type": "file",
+                    "url": "https://files.pythonhosted.org/packages/77/c6/040cbc72480d789a5f40d63fb484d3106554c4dfa2d2b70ad5022057750f/webencodings-0.6.1-py3-none-any.whl",
+                    "sha256": "7fab6269c8bf237c657876b52058ccb182e861518d1c695c1a9aaa8c1c105d5b"
+                },
+                {
+                    "type": "file",
+                    "url": "https://files.pythonhosted.org/packages/5c/fb/8be39dc47b0ed9bbc80f384906eed87fa974c9b377a7a430118c3b405550/xmlschema-4.3.2-py3-none-any.whl",
+                    "sha256": "cf5c970a30f6ebcb3da35260e694704cc0b6794d8ace46125bb2a95e38ed9307"
+                }
+            ]
+        },
+        {
+            "name": "python3-schwifty",
+            "buildsystem": "simple",
+            "build-commands": [
+                "pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} \"schwifty\" --no-build-isolation --ignore-installed"
+            ],
+            "sources": [
+                {
+                    "type": "file",
+                    "url": "https://files.pythonhosted.org/packages/9c/42/7703bd45b62fecd44cd7d3495423097e2f7d28bc2e99e7c1af68892ab157/pycountry-26.2.16-py3-none-any.whl",
+                    "sha256": "115c4baf7cceaa30f59a4694d79483c9167dbce7a9de4d3d571c5f3ea77c305a"
+                },
+                {
+                    "type": "file",
+                    "url": "https://files.pythonhosted.org/packages/c8/8c/a0f14f2fcdd846839c478048032b2fc93293deaa936ff6751f27dcf50995/rstr-3.2.2-py3-none-any.whl",
+                    "sha256": "f39195d38da1748331eeec52f1276e71eb6295e7949beea91a5e9af2340d7b3b"
+                },
+                {
+                    "type": "file",
+                    "url": "https://files.pythonhosted.org/packages/27/15/0a36ea4e9f15c939b018c32c3c447aa4dd185a02ce932bae8548b18dc43f/schwifty-2026.10.0-py3-none-any.whl",
+                    "sha256": "8a758ab3fb122778f7ebc7ae553e7574b4d55a2919cb82ee4aeb345afa43a0b7"
+                }
+            ]
+        },
+        {
+            "name": "saldo",
+            "builddir": true,
+            "buildsystem": "meson",
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "https://gitlab.com/tabos/saldo.git",
+                    "tag": "0.9.0",
+                    "commit": "32dc269c041264c5c8bb79cf0ad3784b517339d1"
                 }
             ]
         }
